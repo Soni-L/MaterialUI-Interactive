@@ -1,31 +1,49 @@
-import React, { useState, useEffect } from 'react';
-import Editor from './Editor'
-import useLocalStorage from '../hooks/useLocalStorage'
+import React, { useState, useEffect } from "react";
+import Editor from "./Editor";
+import useLocalStorage from "../hooks/useLocalStorage";
+import { fullPage } from "./data";
 
 function App() {
-  const [html, setHtml] = useLocalStorage('html', '')
-  const [css, setCss] = useLocalStorage('css', '')
-  const [js, setJs] = useLocalStorage('js', '')
-  const [srcDoc, setSrcDoc] = useState('')
+  // const [html, setHtml] = useLocalStorage("html", "");
+  // const [css, setCss] = useLocalStorage("css", "");
+  const [js, setJs] = useState(fullPage);
+  const [srcDoc, setSrcDoc] = useState("");
 
   useEffect(() => {
     const timeout = setTimeout(() => {
       setSrcDoc(`
-        <html>
-          <body>${html}</body>
-          <style>${css}</style>
-          <script>${js}</script>
-        </html>
-      `)
-    }, 250)
+      <!DOCTYPE html>
+      <html lang="en">
+        <head>
+          <title>My page</title>
+          <meta charset="utf-8" />
+          <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+          <script src="https://unpkg.com/react@latest/umd/react.development.js" crossorigin="anonymous"></script>
+          <script src="https://unpkg.com/react-dom@latest/umd/react-dom.development.js"></script>
+          <script src="https://unpkg.com/@material-ui/core@latest/umd/material-ui.development.js" crossorigin="anonymous"></script>
+          <script src="https://unpkg.com/babel-standalone@latest/babel.min.js" crossorigin="anonymous"></script>
+          <!-- Fonts to support Material Design -->
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+          <!-- Icons to support Material Design -->
+          <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+        </head>
+        <body>
+          <div id="root"></div>
+          <script type="text/babel">
+          ${js}
+          </script>
+        </body>
+      </html>
+      `);
+    }, 250);
 
-    return () => clearTimeout(timeout)
-  }, [html, css, js])
+    return () => clearTimeout(timeout);
+  }, [js]);
 
   return (
     <>
       <div className="pane top-pane">
-        <Editor
+        {/* <Editor
           language="xml"
           displayName="HTML"
           value={html}
@@ -36,7 +54,7 @@ function App() {
           displayName="CSS"
           value={css}
           onChange={setCss}
-        />
+        /> */}
         <Editor
           language="javascript"
           displayName="JS"
@@ -55,7 +73,7 @@ function App() {
         />
       </div>
     </>
-  )
+  );
 }
 
 export default App;

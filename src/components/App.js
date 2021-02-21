@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Editor from "./Editor";
-import useLocalStorage from "../hooks/useLocalStorage";
+//import useLocalStorage from "../hooks/useLocalStorage";
 import { fullPage } from "./data";
 
 function App() {

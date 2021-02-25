@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
-import Editor from "./Editor";
-//import useLocalStorage from "../hooks/useLocalStorage";
+import Editor from "../../components/Editor";
 import { fullPage } from "./data";
 
-function App() {
-  // const [html, setHtml] = useLocalStorage("html", "");
-  // const [css, setCss] = useLocalStorage("css", "");
+function BasicUsage() {
   const [js, setJs] = useState(fullPage);
   const [srcDoc, setSrcDoc] = useState("");
 
@@ -31,6 +28,12 @@ function App() {
           <div id="root"></div>
           <script type="text/babel">
           ${js}
+          ReactDOM.render(
+            <div align="center">
+              <ExtendedButton/>
+            </div>,
+            document.querySelector('#root'),
+          );         
           </script>
         </body>
       </html>
@@ -42,33 +45,19 @@ function App() {
 
   return (
     <>
-      <div className="pane top-pane">
-        {/* <Editor
-          language="xml"
-          displayName="HTML"
-          value={html}
-          onChange={setHtml}
-        />
-        <Editor
-          language="css"
-          displayName="CSS"
-          value={css}
-          onChange={setCss}
-        /> */}
+      <div className="pane horizontal-pane">
         <Editor
           language="javascript"
           displayName="JS"
           value={js}
           onChange={setJs}
         />
-      </div>
-      <div className="pane">
         <iframe
           srcDoc={srcDoc}
           title="output"
           sandbox="allow-scripts"
           frameBorder="0"
-          width="100%"
+          width="50%"
           height="100%"
         />
       </div>
@@ -76,4 +65,4 @@ function App() {
   );
 }
 
-export default App;
+export default BasicUsage;

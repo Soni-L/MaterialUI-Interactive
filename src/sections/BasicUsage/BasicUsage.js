@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { Modal } from "@material-ui/core";
 import Editor from "../../components/Editor";
 import { fullPage } from "./data";
 
 function BasicUsage() {
   const [js, setJs] = useState(fullPage);
   const [srcDoc, setSrcDoc] = useState("");
+  const [rightClick, setRightClick] = useState("");
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -43,6 +45,19 @@ function BasicUsage() {
     return () => clearTimeout(timeout);
   }, [js]);
 
+  const handleContextMenu = (e) => {
+    e.preventDefault();
+    console.log(e.srcElement.innerText);
+    setRightClick(e?.srcElement?.innerText);
+  };
+
+  useEffect(() => {
+    document.addEventListener("contextmenu", handleContextMenu);
+    return () => {
+      document.removeEventListener("contextmenu", handleContextMenu);
+    };
+  }, []);
+
   return (
     <>
       <div className="pane horizontal-pane">
@@ -60,6 +75,40 @@ function BasicUsage() {
           width="50%"
           height="100%"
         />
+        <Modal
+          open={rightClick ? true : false}
+          onClose={() => setRightClick("")}
+        >
+          <div
+            style={{
+              position: "fixed",
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              flexDirection: "column",
+              backgroundColor: "black",
+            }}
+          >
+            <button
+              onClick={() => setRightClick("")}
+              style={{
+                height: "50px",
+                color: "black",
+                backgroundColor: "white",
+                paddingBottom: "5px",
+              }}
+            >
+              CLOSE MODAL
+            </button>
+            <iframe
+              src={`https://material-ui.com/api/${rightClick}`}
+              title="output"
+              frameBorder="0"
+              width="100%"
+              height="100%"
+            />
+          </div>
+        </Modal>
       </div>
     </>
   );

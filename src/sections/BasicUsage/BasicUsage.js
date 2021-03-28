@@ -1,12 +1,52 @@
 import React, { useState, useEffect } from "react";
-import { Modal } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { Modal, Stepper, Step, StepButton } from "@material-ui/core";
 import Editor from "../../components/Editor";
-import { fullPage } from "./data";
+import { intro, theme, styling } from "./data";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "500px",
+  },
+  button: {
+    marginRight: theme.spacing(1),
+  },
+  completed: {
+    display: "inline-block",
+  },
+  instructions: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+  },
+}));
+
+function getSteps() {
+  return ["basic", "theming", "styling"];
+}
 
 function BasicUsage() {
-  const [js, setJs] = useState(fullPage);
+  const [js, setJs] = useState(intro);
   const [srcDoc, setSrcDoc] = useState("");
   const [rightClick, setRightClick] = useState("");
+  const classes = useStyles();
+  const steps = getSteps();
+  const [activeStep, setActiveStep] = React.useState(0);
+
+  useEffect(() => {
+    if (activeStep === 0) {
+      setJs(intro);
+    }
+    if (activeStep === 1) {
+      setJs(theme);
+    }
+    if (activeStep === 2) {
+      setJs(styling);
+    }
+  }, [activeStep]);
+
+  const handleStep = (step) => {
+    setActiveStep(step);
+  };
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -45,21 +85,21 @@ function BasicUsage() {
     return () => clearTimeout(timeout);
   }, [js]);
 
-  const handleContextMenu = (e) => {
-    e.preventDefault();
-    console.log(e.srcElement.innerText);
-    setRightClick(e?.srcElement?.innerText);
-  };
+  // const handleContextMenu = (e) => {
+  //   e.preventDefault();
+  //   console.log(e.srcElement.innerText);
+  //   setRightClick(e?.srcElement?.innerText);
+  // };
 
-  useEffect(() => {
-    document.addEventListener("contextmenu", handleContextMenu);
-    return () => {
-      document.removeEventListener("contextmenu", handleContextMenu);
-    };
-  }, []);
+  // useEffect(() => {
+  //   document.addEventListener("contextmenu", handleContextMenu);
+  //   return () => {
+  //     document.removeEventListener("contextmenu", handleContextMenu);
+  //   };
+  // }, []);
 
   return (
-    <>
+    <div>
       <div className="pane horizontal-pane">
         <Editor
           language="javascript"
@@ -67,14 +107,26 @@ function BasicUsage() {
           value={js}
           onChange={setJs}
         />
-        <iframe
-          srcDoc={srcDoc}
-          title="output"
-          sandbox="allow-scripts"
-          frameBorder="0"
-          width="50%"
-          height="100%"
-        />
+        <div>
+          <iframe
+            srcDoc={srcDoc}
+            title="output"
+            sandbox="allow-scripts"
+            frameBorder="0"
+            width="100%"
+            height="90%"
+          />
+          <Stepper activeStep={activeStep} className={classes.root}>
+            {steps.map((label, index) => (
+              <Step key={label}>
+                <StepButton onClick={(e) => handleStep(index)} disabled={false}>
+                  {label}
+                </StepButton>
+              </Step>
+            ))}
+          </Stepper>
+        </div>
+
         <Modal
           open={rightClick ? true : false}
           onClose={() => setRightClick("")}
@@ -98,7 +150,7 @@ function BasicUsage() {
                 paddingBottom: "5px",
               }}
             >
-              CLOSE MODAL
+              CLOSE
             </button>
             <iframe
               src={`https://material-ui.com/api/${rightClick}`}
@@ -110,7 +162,7 @@ function BasicUsage() {
           </div>
         </Modal>
       </div>
-    </>
+    </div>
   );
 }
 

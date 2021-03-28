@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import BasicUsage from "./sections/BasicUsage/BasicUsage";
+import Layouts from "./sections/Layouts/Layouts";
 
 const Intro = () => {
   return (
@@ -26,23 +27,17 @@ function App() {
               margin: "0px 0px 0px 0px",
             }}
           >
-            <li
-              style={{
-                display: "inline",
-                marginRight: "5px",
-                marginTop: "0px",
-              }}
-            >
+            <li style={{ display: "inline" }}>
               <Link
-                to={"/"}
+                to={"/basic"}
                 className="nav-link"
                 style={{
                   textDecoration: "none",
-                  fontWeight: "bold",
                   color: "white",
-                  backgroundColor: "#FF00FF",
-                  borderRadius: "0.3rem",
+                  backgroundColor: "#3f51b5",
+                  borderRadius: "0.2rem",
                   padding: "1px",
+                  marginRight: "5px",
                 }}
               >
                 Intro
@@ -50,18 +45,17 @@ function App() {
             </li>
             <li style={{ display: "inline" }}>
               <Link
-                to={"/basic"}
+                to={"/layouts"}
                 className="nav-link"
                 style={{
                   textDecoration: "none",
-                  fontWeight: "bold",
                   color: "white",
-                  backgroundColor: "#FF00FF",
-                  borderRadius: "0.3rem",
+                  backgroundColor: "#3f51b5",
+                  borderRadius: "0.2rem",
                   padding: "1px",
                 }}
               >
-                Basic-Usage
+                layout
               </Link>
             </li>
           </ul>
@@ -70,6 +64,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Intro} />
           <Route exact path="/basic" component={BasicUsage} />
+          <Route exact path="/layouts" component={Layouts} />
         </Switch>
       </div>
     </Router>

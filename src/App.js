@@ -7,7 +7,7 @@ const Intro = () => {
   return (
     <div className="pane horizontal-pane">
       <iframe
-        src="https://material-ui.com"
+        src="https://codesandbox.io/s/8xxmr2r6ll"
         title="output"
         frameBorder="0"
         width="100%"

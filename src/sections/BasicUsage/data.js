@@ -15,8 +15,8 @@ const {
 
   function ExtendedButton() {
     return (
-      <Button variant="contained" color="primary">
-          Primary
+      <Button variant="contained" onClick={()=> alert('hello button')} color="primary">
+          button
       </Button>
     );
   }`;
@@ -50,8 +50,8 @@ const {
   function ExtendedButton() {
     return (
       <ThemeProvider theme={theme}>
-        <Button variant="contained" color="primary">
-            Primary
+        <Button variant="contained" onClick={()=> alert('hello button')} color="primary">
+            button
         </Button>
       </ThemeProvider>
     );
@@ -94,8 +94,8 @@ const {
     const classes = useStyles();
     return (
       <ThemeProvider theme={theme}>
-        <Button variant="contained" className={classes.root} color="primary">
-            Primary
+        <Button variant="contained"  color="primary"  className={classes.root}>
+            button
         </Button>
       </ThemeProvider>
     );

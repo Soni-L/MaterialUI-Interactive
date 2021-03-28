@@ -8,15 +8,24 @@ const {
     makeStyles,
     createMuiTheme,
     Box,
-    SvgIcon,
+    Grid,
     Link,
     Button,
   } = MaterialUI;
 
+  const useStyles = makeStyles({
+    containter: {
+      padding : '5px'
+    }
+  });
+
   function ExtendedButton() {
+    const classes = useStyles();
     return (
-      <Button variant="contained" color="primary">
-          Primary
-      </Button>
+      <Container>
+        <Button variant="contained" color="primary">
+            Primary
+        </Button>
+      </Container>
     );
   }`;

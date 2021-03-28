@@ -85,18 +85,18 @@ function BasicUsage() {
     return () => clearTimeout(timeout);
   }, [js]);
 
-  // const handleContextMenu = (e) => {
-  //   e.preventDefault();
-  //   console.log(e.srcElement.innerText);
-  //   setRightClick(e?.srcElement?.innerText);
-  // };
+  const handleContextMenu = (e) => {
+    e.preventDefault();
+    console.log(e.srcElement.innerText);
+    setRightClick(e?.srcElement?.innerText);
+  };
 
-  // useEffect(() => {
-  //   document.addEventListener("contextmenu", handleContextMenu);
-  //   return () => {
-  //     document.removeEventListener("contextmenu", handleContextMenu);
-  //   };
-  // }, []);
+  useEffect(() => {
+    document.addEventListener("contextmenu", handleContextMenu);
+    return () => {
+      document.removeEventListener("contextmenu", handleContextMenu);
+    };
+  }, []);
 
   return (
     <div>
@@ -111,7 +111,7 @@ function BasicUsage() {
           <iframe
             srcDoc={srcDoc}
             title="output"
-            sandbox="allow-scripts"
+            sandbox="allow-modals allow-scripts allow-forms allow-pointer-lock allow-same-origin"
             frameBorder="0"
             width="100%"
             height="90%"

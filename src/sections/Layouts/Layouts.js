@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Editor from "../../components/Editor";
+import { ButtonGroup, Button } from "@material-ui/core";
 import { fullPage } from "./data";
 
 function Layouts() {
   const [js, setJs] = useState(fullPage);
   const [srcDoc, setSrcDoc] = useState("");
+  const [respWidth, setRespWidth] = useState("400px");
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -44,7 +46,7 @@ function Layouts() {
   }, [js]);
 
   return (
-    <>
+    <div>
       <div className="pane horizontal-pane">
         <Editor
           language="javascript"
@@ -52,18 +54,29 @@ function Layouts() {
           value={js}
           onChange={setJs}
         />
-        <div>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <ButtonGroup>
+            <Button onClick={() => setRespWidth("600px")}>Large</Button>
+            <Button onClick={() => setRespWidth("300px")}>Small</Button>
+          </ButtonGroup>
           <iframe
             srcDoc={srcDoc}
             title="output"
             sandbox="allow-scripts"
             frameBorder="0"
-            width="50%"
+            width={respWidth}
             height="100%"
           />
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Modal, Stepper, Step, StepButton } from "@material-ui/core";
 import Editor from "../../components/Editor";
-import { intro, theme, styling } from "./data";
+import { intro, theme, styling, consume, consumerForm } from "./data";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "500px",
+    width: "400px",
   },
   button: {
     marginRight: theme.spacing(1),
@@ -21,11 +21,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ["basic", "theming", "styling"];
+  return ["basic", "theming", "styling", "consume"];
 }
 
 function BasicUsage() {
   const [js, setJs] = useState(intro);
+  const [consumerJs, setConsumerJs] = useState(consumerForm);
   const [srcDoc, setSrcDoc] = useState("");
   const [rightClick, setRightClick] = useState("");
   const classes = useStyles();
@@ -41,6 +42,9 @@ function BasicUsage() {
     }
     if (activeStep === 2) {
       setJs(styling);
+    }
+    if (activeStep === 3) {
+      setJs(consume);
     }
   }, [activeStep]);
 
@@ -69,10 +73,10 @@ function BasicUsage() {
         <body>
           <div id="root"></div>
           <script type="text/babel">
-          ${js}
+          ${activeStep === 3 ? js + consumerJs : js}
           ReactDOM.render(
             <div align="center">
-              <ExtendedButton/>
+              ${activeStep === 3 ? "<Form/>" : "<ExtendedButton/>"}
             </div>,
             document.querySelector('#root'),
           );         
@@ -83,7 +87,7 @@ function BasicUsage() {
     }, 250);
 
     return () => clearTimeout(timeout);
-  }, [js]);
+  }, [js, consumerJs, activeStep]);
 
   const handleContextMenu = (e) => {
     e.preventDefault();
@@ -101,12 +105,36 @@ function BasicUsage() {
   return (
     <div>
       <div className="pane horizontal-pane">
-        <Editor
-          language="javascript"
-          displayName="JS"
-          value={js}
-          onChange={setJs}
-        />
+        {activeStep !== 3 ? (
+          <Editor
+            language="javascript"
+            displayName="JS"
+            value={js}
+            onChange={setJs}
+          />
+        ) : (
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              flexDirection: "row",
+            }}
+          >
+            <Editor
+              language="javascript"
+              displayName="ExtendedButton"
+              value={js}
+              onChange={setJs}
+            />
+            <Editor
+              language="javascript"
+              displayName="Form"
+              value={consumerJs}
+              onChange={setConsumerJs}
+            />
+          </div>
+        )}
         <div>
           <iframe
             srcDoc={srcDoc}

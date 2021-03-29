@@ -66,21 +66,100 @@ const {
   });
 
   const useStyles = makeStyles({
-    root: {
-      width : "300px",
+    extra: {
+      width : "200px",
       border : "solid 1px black",
+      /*
+      '&.MuiButton-root': {
+       backgroundColor: 'pink',
+      },
+      */
+    }
+  });
+
+function ExtendedButton(props) {
+  const classes = useStyles();
+  return (
+    <ThemeProvider theme={theme}>
+      <Button 
+        variant="contained" 
+        onClick={props.onClick} 
+        color="primary" 
+        className={classes.extra}
+      >
+        button
+      </Button>
+    </ThemeProvider>
+    );
+  }
+
+  //export default ExtendedButton`;
+
+export const consume = `
+const {
+    colors,
+    ThemeProvider,
+    makeStyles,
+    createMuiTheme,
+    Button,
+  } = MaterialUI;
+
+  const theme = createMuiTheme({
+    palette: {
+      primary: {
+        main: colors.orange[500],
+      },
+      secondary: {
+        main: colors.green[500],
+      },
+    },
+  });
+
+  const useStyles = makeStyles({
+    extra: {
+      width : props => props.width || "200px",
+      border : "solid 1px black",
+      /*
+      '&.MuiButton-root': {
+       backgroundColor: 'pink',
+      },
+      */
     }
   });
 
   function ExtendedButton(props) {
-    const classes = useStyles();
+    const classes = useStyles(props);
     return (
       <ThemeProvider theme={theme}>
-        <Button variant="contained" onClick={props.onClick} color="primary" className={classes.root}>
-            button
+        <Button 
+          variant="contained" 
+          onClick={props.onClick} 
+          color="primary" 
+          className={classes.extra}
+        >
+          {props.label || 'button'}
         </Button>
       </ThemeProvider>
     );
   }
 
   //export default ExtendedButton`;
+
+export const consumerForm = `
+  function Form(props) {
+    return (
+      <div 
+        style={{display: "flex", 
+        flexDirection: "column", 
+        width : "300px",
+        alignItems : "center",
+      }}>
+        <input value="username" style={{height : "20px", width : "100%"}}/>
+        <input value="password" style={{height : "20px", width : "100%"}} type='password'/>
+
+        <ExtendedButton 
+          onClick={() => alert('form submitted')}
+        />
+      </div>
+    );
+  }`;

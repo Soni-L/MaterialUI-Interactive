@@ -24,20 +24,31 @@ const {
   Button,
   } = MaterialUI;
 
-  const theme = createMuiTheme({
+  const mozendaTheme = createMuiTheme({
     palette: {
       primary: {
-        main: colors.orange[500],
+        main: "rgba(255, 86, 33, 1)",
       },
       secondary: {
-        main: colors.green[500],
+        main: "rgba(0, 61, 89, 1)",
+      },
+    },
+  });
+
+  const dexiTheme = createMuiTheme({
+    palette: {
+      primary: {
+        main: "#8dc540",
+      },
+      secondary: {
+        main: "#203a5b",
       },
     },
   });
 
   function ExtendedButton() {
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={mozendaTheme}>
         <Button variant="contained" onClick={()=> alert('hello button')} color="primary">
             button
         </Button>
@@ -54,13 +65,13 @@ const {
     Button,
   } = MaterialUI;
 
-  const theme = createMuiTheme({
+  const mozendaTheme = createMuiTheme({
     palette: {
       primary: {
-        main: colors.orange[500],
+        main: "rgba(255, 86, 33, 1)",
       },
       secondary: {
-        main: colors.green[500],
+        main: "rgba(0, 61, 89, 1)",
       },
     },
   });
@@ -71,7 +82,7 @@ const {
       border : "solid 1px black",
       /*
       '&.MuiButton-root': {
-       backgroundColor: 'pink',
+       backgroundColor: '#8dc540',
       },
       */
     }
@@ -80,7 +91,7 @@ const {
 function ExtendedButton(props) {
   const classes = useStyles();
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={mozendaTheme}>
       <Button 
         variant="contained" 
         onClick={props.onClick} 
@@ -104,23 +115,24 @@ const {
     Button,
   } = MaterialUI;
 
-  const theme = createMuiTheme({
+  const mozendaTheme = createMuiTheme({
     palette: {
       primary: {
-        main: colors.orange[500],
+        main: "rgba(255, 86, 33, 1)",
       },
       secondary: {
-        main: colors.green[500],
+        main: "rgba(0, 61, 89, 1)",
       },
     },
   });
+  
 
   const useStyles = makeStyles({
     extra: {
       width : props => props.width || "200px",
       border : "solid 1px black",
       '&.MuiButton-root': {
-       backgroundColor: 'pink',
+       backgroundColor: '#8dc540',
       },
     }
   });
@@ -128,7 +140,7 @@ const {
   function ExtendedButton(props) {
     const classes = useStyles(props);
     return (
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={mozendaTheme}>
         <Button 
           variant="contained" 
           onClick={props.onClick} 

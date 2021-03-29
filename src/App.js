@@ -3,18 +3,28 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import BasicUsage from "./sections/BasicUsage/BasicUsage";
 import Layouts from "./sections/Layouts/Layouts";
 import NumericInput from "./sections/NumericInput/NumericInput";
+import { Container, Typography } from "@material-ui/core";
+import IntroGif from "./assets/mui-gif.gif";
 
 const Intro = () => {
   return (
-    <div className="pane horizontal-pane">
-      <iframe
-        src="https://codesandbox.io/s/8xxmr2r6ll"
-        title="output"
-        frameBorder="0"
-        width="100%"
-        height="100%"
-      />
-    </div>
+    <Container
+      maxWidth="800px"
+      style={{
+        backgroundColor: "#282c34",
+        height: "95vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <Typography variant="h3" color="secondary">
+        Material UI
+      </Typography>
+      <br />
+      <img src={IntroGif} alt="loading..." width="800px" />
+    </Container>
   );
 };
 
@@ -22,7 +32,14 @@ function App() {
   return (
     <Router>
       <div style={{ marginTop: "20px" }}>
-        <nav style={{ position: "fixed", top: "0", marginLeft: "0px" }}>
+        <nav
+          style={{
+            position: "fixed",
+            top: "0",
+            marginLeft: "0px",
+            width: "100%",
+          }}
+        >
           <ul
             style={{
               margin: "0px 0px 0px 0px",
@@ -34,11 +51,10 @@ function App() {
                 className="nav-link"
                 style={{
                   textDecoration: "none",
-                  color: "white",
-                  backgroundColor: "#3f51b5",
+                  color: "#3f51b5",
                   borderRadius: "0.2rem",
                   padding: "1px",
-                  marginRight: "5px",
+                  marginRight: "10px",
                 }}
               >
                 Intro
@@ -50,14 +66,13 @@ function App() {
                 className="nav-link"
                 style={{
                   textDecoration: "none",
-                  color: "white",
-                  backgroundColor: "#3f51b5",
+                  color: "#3f51b5",
                   borderRadius: "0.2rem",
                   padding: "1px",
-                  marginRight: "5px",
+                  marginRight: "10px",
                 }}
               >
-                layout
+                Layout
               </Link>
             </li>
             <li style={{ display: "inline" }}>
@@ -66,13 +81,12 @@ function App() {
                 className="nav-link"
                 style={{
                   textDecoration: "none",
-                  color: "white",
-                  backgroundColor: "#3f51b5",
+                  color: "#3f51b5",
                   borderRadius: "0.2rem",
                   padding: "1px",
                 }}
               >
-                numeric-input-exercise
+                NumericInput-Ex
               </Link>
             </li>
           </ul>

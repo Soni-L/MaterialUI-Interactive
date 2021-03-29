@@ -1,16 +1,10 @@
 export const intro = `
 const {
-    colors,
-    CssBaseline,
-    ThemeProvider,
-    Typography,
-    Container,
-    makeStyles,
-    createMuiTheme,
-    Box,
-    SvgIcon,
-    Link,
-    Button,
+  colors,
+  ThemeProvider,
+  makeStyles,
+  createMuiTheme,
+  Button,
   } = MaterialUI;
 
   function ExtendedButton() {
@@ -23,17 +17,11 @@ const {
 
 export const theme = `
 const {
-    colors,
-    CssBaseline,
-    ThemeProvider,
-    Typography,
-    Container,
-    makeStyles,
-    createMuiTheme,
-    Box,
-    SvgIcon,
-    Link,
-    Button,
+  colors,
+  ThemeProvider,
+  makeStyles,
+  createMuiTheme,
+  Button,
   } = MaterialUI;
 
   const theme = createMuiTheme({
@@ -60,15 +48,9 @@ const {
 export const styling = `
 const {
     colors,
-    CssBaseline,
     ThemeProvider,
-    Typography,
-    Container,
     makeStyles,
     createMuiTheme,
-    Box,
-    SvgIcon,
-    Link,
     Button,
   } = MaterialUI;
 
@@ -90,13 +72,15 @@ const {
     }
   });
 
-  function ExtendedButton() {
+  function ExtendedButton(props) {
     const classes = useStyles();
     return (
       <ThemeProvider theme={theme}>
-        <Button variant="contained"  color="primary"  className={classes.root}>
+        <Button variant="contained" onClick={props.onClick} color="primary" className={classes.root}>
             button
         </Button>
       </ThemeProvider>
     );
-  }`;
+  }
+
+  //export default ExtendedButton`;

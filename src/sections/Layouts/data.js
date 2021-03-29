@@ -1,17 +1,10 @@
 export const fullPage = `
 const {
     colors,
-    CssBaseline,
-    ThemeProvider,
-    Typography,
     Container,
     makeStyles,
-    createMuiTheme,
-    Box,
     Grid,
     Paper,
-    Link,
-    Button,
   } = MaterialUI;
 
   const useStyles = makeStyles({
@@ -35,23 +28,16 @@ const {
         </Grid>
       </Grid>
     );
-  }`;
+}`;
 
 export const extraResponsive = `
 const {
-    colors,
-    CssBaseline,
-    ThemeProvider,
-    Typography,
-    Container,
-    makeStyles,
-    createMuiTheme,
-    Box,
-    Grid,
-    Paper,
-    Link,
-    Button,
-  } = MaterialUI;
+  colors,
+  Container,
+  makeStyles,
+  Grid,
+  Paper,
+} = MaterialUI;
 
   const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("xs")]: {

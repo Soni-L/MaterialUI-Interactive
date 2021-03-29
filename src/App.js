@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import BasicUsage from "./sections/BasicUsage/BasicUsage";
 import Layouts from "./sections/Layouts/Layouts";
+import NumericInput from "./sections/NumericInput/NumericInput";
 
 const Intro = () => {
   return (
@@ -53,9 +54,25 @@ function App() {
                   backgroundColor: "#3f51b5",
                   borderRadius: "0.2rem",
                   padding: "1px",
+                  marginRight: "5px",
                 }}
               >
                 layout
+              </Link>
+            </li>
+            <li style={{ display: "inline" }}>
+              <Link
+                to={"/numeric-input-exercise"}
+                className="nav-link"
+                style={{
+                  textDecoration: "none",
+                  color: "white",
+                  backgroundColor: "#3f51b5",
+                  borderRadius: "0.2rem",
+                  padding: "1px",
+                }}
+              >
+                numeric-input-exercise
               </Link>
             </li>
           </ul>
@@ -65,6 +82,11 @@ function App() {
           <Route exact path="/" component={Intro} />
           <Route exact path="/basic" component={BasicUsage} />
           <Route exact path="/layouts" component={Layouts} />
+          <Route
+            exact
+            path="/numeric-input-exercise"
+            component={NumericInput}
+          />
         </Switch>
       </div>
     </Router>

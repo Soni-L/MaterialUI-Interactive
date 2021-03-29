@@ -119,11 +119,9 @@ const {
     extra: {
       width : props => props.width || "200px",
       border : "solid 1px black",
-      /*
       '&.MuiButton-root': {
        backgroundColor: 'pink',
       },
-      */
     }
   });
 

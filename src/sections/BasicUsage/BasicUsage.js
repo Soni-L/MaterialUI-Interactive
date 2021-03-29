@@ -108,7 +108,7 @@ function BasicUsage() {
         {activeStep !== 3 ? (
           <Editor
             language="javascript"
-            displayName="JS"
+            displayName="ExtendedButton"
             value={js}
             onChange={setJs}
           />

@@ -93,7 +93,7 @@ function Layouts() {
       <div className="pane horizontal-pane">
         <Editor
           language="javascript"
-          displayName="JS"
+          displayName="Layouts"
           value={js}
           onChange={setJs}
         />

@@ -154,9 +154,15 @@ export const consumerForm = `
         width : "300px",
         alignItems : "center",
       }}>
-        <input value="username" style={{height : "20px", width : "100%"}}/>
-        <input value="password" style={{height : "20px", width : "100%"}} type='password'/>
-
+        <input 
+          value="username" 
+          style={{height : "20px", width : "100%"}}
+        />
+        <input 
+          value="password" 
+          style={{height : "20px", width : "100%"}} 
+          type='password'
+        />
         <ExtendedButton 
           onClick={() => alert('form submitted')}
         />

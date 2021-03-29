@@ -1,12 +1,55 @@
 import React, { useState, useEffect } from "react";
 import Editor from "../../components/Editor";
-import { ButtonGroup, Button } from "@material-ui/core";
-import { fullPage } from "./data";
+import { makeStyles } from "@material-ui/core/styles";
+import {
+  ButtonGroup,
+  Button,
+  Stepper,
+  Step,
+  StepButton,
+} from "@material-ui/core";
+import { fullPage, extraResponsive } from "./data";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: "500px",
+  },
+  button: {
+    marginRight: theme.spacing(1),
+  },
+  completed: {
+    display: "inline-block",
+  },
+  instructions: {
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1),
+  },
+}));
+
+function getSteps() {
+  return ["grid layout", "dynamic layout"];
+}
 
 function Layouts() {
   const [js, setJs] = useState(fullPage);
   const [srcDoc, setSrcDoc] = useState("");
-  const [respWidth, setRespWidth] = useState("400px");
+  const [respWidth, setRespWidth] = useState("600px");
+  const classes = useStyles();
+  const steps = getSteps();
+  const [activeStep, setActiveStep] = React.useState(0);
+
+  useEffect(() => {
+    if (activeStep === 0) {
+      setJs(fullPage);
+    }
+    if (activeStep === 1) {
+      setJs(extraResponsive);
+    }
+  }, [activeStep]);
+
+  const handleStep = (step) => {
+    setActiveStep(step);
+  };
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -60,12 +103,26 @@ function Layouts() {
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
+            width: "620px",
           }}
         >
           <ButtonGroup>
-            <Button onClick={() => setRespWidth("600px")}>Large</Button>
-            <Button onClick={() => setRespWidth("300px")}>Small</Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => setRespWidth("600px")}
+            >
+              Large
+            </Button>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => setRespWidth("300px")}
+            >
+              Small
+            </Button>
           </ButtonGroup>
+          <br />
           <iframe
             srcDoc={srcDoc}
             title="output"
@@ -73,7 +130,17 @@ function Layouts() {
             frameBorder="0"
             width={respWidth}
             height="100%"
+            style={{ backgroundColor: "#282c34" }}
           />
+          <Stepper activeStep={activeStep} className={classes.root}>
+            {steps.map((label, index) => (
+              <Step key={label}>
+                <StepButton onClick={(e) => handleStep(index)} disabled={false}>
+                  {label}
+                </StepButton>
+              </Step>
+            ))}
+          </Stepper>
         </div>
       </div>
     </div>

@@ -156,6 +156,8 @@ const {
   //export default ExtendedButton`;
 
 export const consumerForm = `
+  //import ExtendedButton
+  
   function Form(props) {
     return (
       <div 

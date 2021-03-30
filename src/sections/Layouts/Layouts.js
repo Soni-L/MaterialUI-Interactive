@@ -112,14 +112,14 @@ function Layouts() {
               color="primary"
               onClick={() => setRespWidth("600px")}
             >
-              Large
+              SM
             </Button>
             <Button
               variant="contained"
               color="primary"
               onClick={() => setRespWidth("300px")}
             >
-              Small
+              XS
             </Button>
           </ButtonGroup>
           <br />

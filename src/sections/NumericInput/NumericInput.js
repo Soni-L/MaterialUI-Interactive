@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Modal, Stepper, Step, StepButton } from "@material-ui/core";
 import Editor from "../../components/Editor";
 import documentationUrlMapper from "../../utils/utilityFunctions";
-import { textField } from "./data";
+import { textField, adornment, arrows } from "./data";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ["start with textfield", "input adornment"];
+  return ["input", "adornment", "arrows", "composition"];
 }
 
 function BasicUsage() {
@@ -38,7 +38,10 @@ function BasicUsage() {
       setJs(textField);
     }
     if (activeStep === 1) {
-      setJs(textField);
+      setJs(adornment);
+    }
+    if (activeStep === 2) {
+      setJs(arrows);
     }
   }, [activeStep]);
 
@@ -70,7 +73,7 @@ function BasicUsage() {
           ${js}
           ReactDOM.render(
             <div align="center">
-                <NumericInput/>
+                ${activeStep === 2 ? "<Arrows/>" : "<NumericInput/>"}
             </div>,
             document.querySelector('#root'),
           );         
@@ -101,7 +104,7 @@ function BasicUsage() {
       <div className="pane horizontal-pane">
         <Editor
           language="javascript"
-          displayName="NumericInput"
+          displayName={activeStep === 2 ? "Arrows" : "NumericInput"}
           value={js}
           onChange={setJs}
         />

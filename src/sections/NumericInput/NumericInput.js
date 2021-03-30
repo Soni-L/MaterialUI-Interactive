@@ -3,7 +3,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Modal, Stepper, Step, StepButton } from "@material-ui/core";
 import Editor from "../../components/Editor";
 import documentationUrlMapper from "../../utils/utilityFunctions";
-import { textField, adornment, arrows } from "./data";
+import {
+  textField,
+  adornment,
+  arrows,
+  arrowsComposition,
+  inputComposition,
+} from "./data";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,6 +48,9 @@ function BasicUsage() {
     }
     if (activeStep === 2) {
       setJs(arrows);
+    }
+    if (activeStep === 3) {
+      setJs(inputComposition + arrowsComposition);
     }
   }, [activeStep]);
 
@@ -102,12 +111,37 @@ function BasicUsage() {
   return (
     <div>
       <div className="pane horizontal-pane">
-        <Editor
-          language="javascript"
-          displayName={activeStep === 2 ? "Arrows" : "NumericInput"}
-          value={js}
-          onChange={setJs}
-        />
+        {activeStep !== 3 && (
+          <Editor
+            language="javascript"
+            displayName={activeStep === 2 ? "Arrows" : "NumericInput"}
+            value={js}
+            onChange={setJs}
+          />
+        )}
+        {activeStep === 3 && (
+          <div
+            style={{
+              width: "100%",
+              height: "100%",
+              display: "flex",
+              flexDirection: "row",
+            }}
+          >
+            <Editor
+              language="javascript"
+              displayName="Arrows"
+              value={arrows}
+              onChange={() => console.log("noop")}
+            />
+            <Editor
+              language="javascript"
+              displayName="NumericInput"
+              value={inputComposition}
+              onChange={() => console.log("noop")}
+            />
+          </div>
+        )}
         <div>
           <iframe
             srcDoc={srcDoc}
